@@ -12,6 +12,8 @@ const ProspectoSchema = new Schema ({
   codigoPostal: {type: Number, required: true},
   telefono: {type: Number, required: true},
   rfc: {type: String, required: true},
+  estatus: {type: String, required: true},
+  observaciones: {type: String, required: false},
 });
 
 module.exports = mongoose.model('Prospecto', ProspectoSchema);

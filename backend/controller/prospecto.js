@@ -15,8 +15,8 @@ async function getProspectos (req, res) {
 
 async function postProspecto (req, res) {
   try {
-    const { nombre, apellido, segundoApellido, calle, numeroCasa, colonia, codigoPostal, telefono, rfc } = req.body;
-    const prospecto = Prospecto.create( { nombre, apellido, segundoApellido, calle, numeroCasa, colonia, codigoPostal, telefono, rfc } );
+    const { nombre, apellido, segundoApellido, calle, numeroCasa, colonia, codigoPostal, telefono, rfc, estatus, observaciones } = req.body;
+    const prospecto = Prospecto.create( { nombre, apellido, segundoApellido, calle, numeroCasa, colonia, codigoPostal, telefono, rfc, estatus, observaciones } );
     res.status(200);
     res.json(prospecto);
   } catch (error) {
