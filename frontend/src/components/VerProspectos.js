@@ -5,8 +5,10 @@ import "./verProspectos.css";
 import ApiClient from "../context/ApiClient";
 
 import { Table } from 'antd';
+// import { Badge } from 'antd';
 
 import Header from './Header';
+
 
 
 
@@ -15,7 +17,7 @@ const columns = [
   { title: 'Nombre', dataIndex: 'nombre', key: 'nombre' },
   { title: 'Apellido', dataIndex: 'apellido', key: 'apellido' },
   { title: 'Segundo Apellido', dataIndex: 'segundoApellido', key: 'segundoapellido' },
-  { title: 'Estatus', dataIndex: 'estatus', key: 'estatus'},
+  { title: 'Estatus', dataIndex: 'estatus' , key: 'estatus',},
 ];
 
 
@@ -44,7 +46,6 @@ function VerProspectos() {
                   <p>Codigo Postal: {record.codigoPostal}</p>
                   <p>Telefono: {record.telefono}</p>
                   <p>RFC: {record.rfc}</p>
-                  <p>Estatus: {record.estatus}</p>
                 </div>
                 <div>
                   <p>Observaciones: {record.observaciones}</p>

@@ -49,10 +49,6 @@ function EvaluarProspectos() {
       // console.log(id);
   }
   
-  // let prospectosSinCalificar;
-  // if(prospectData.length == 0) {
-  //   prospectosSinCalificar = prospectData;
-  // }
 
   let prospectosSinCalificar = prospectData.filter((item) => item.estatus.includes("Enviado"));
   prospectosSinCalificar.map((prospecto, i) => {
