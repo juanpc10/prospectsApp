@@ -5,12 +5,13 @@ const controller = require('./controller/prospecto');
 
 
 
-router.get('/prospectos', controller.getProspectos);     /// get by user ===>  username ideally
+router.get('/prospectos', controller.getProspectos);     
 router.post('/prospecto', controller.postProspecto);
 router.delete('/prospecto/:id', controller.deleteProspecto);
+router.put('/prospecto/rechazar/:id/:observaciones', controller.rechazarProspecto);
+router.put('/prospecto/autorizar/:id', controller.autorizarProspecto);       
 
 
-// router.put('/prospects/:id/:active', controller.changeProspectoStatus);          // change by username
 
 
 

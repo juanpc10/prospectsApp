@@ -1,0 +1,20 @@
+
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+}
+
+.container a {
+  color: black;
+  text-decoration-line : none;
+}
+
+.agregar-input {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: 10px;
+}

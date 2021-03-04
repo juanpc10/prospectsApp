@@ -1,0 +1,13 @@
+
+
+
+.table-container {
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+
+.info-prospecto {
+  display: flex;
+  justify-content: space-around;
+}

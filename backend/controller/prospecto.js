@@ -15,8 +15,8 @@ async function getProspectos (req, res) {
 
 async function postProspecto (req, res) {
   try {
-    const { nombre, apellido, segundoApellido, calle, numeroCasa, colonia, codigoPostal, telefono, rfc, estatus, observaciones } = req.body;
-    const prospecto = Prospecto.create( { nombre, apellido, segundoApellido, calle, numeroCasa, colonia, codigoPostal, telefono, rfc, estatus, observaciones } );
+    const { key, nombre, apellido, segundoApellido, calle, numeroCasa, colonia, codigoPostal, telefono, rfc, estatus, observaciones } = req.body;
+    const prospecto = Prospecto.create( { key, nombre, apellido, segundoApellido, calle, numeroCasa, colonia, codigoPostal, telefono, rfc, estatus, observaciones } );
     res.status(200);
     res.json(prospecto);
   } catch (error) {
@@ -37,21 +37,38 @@ async function deleteProspecto (req, res) {
 }
 
 
-// async function changeProspectoStatus (req, res) {
-//   try {
-//     const status = req.params.active;
-//     const prospecto = await Prospecto.findByIdAndUpdate(
-//       { _id: req.params.id },
-//       { active: status },
-//       { new: true }
-//     );
-//     res.status(200);
-//     res.json(prospecto);
-//   } catch (error) {
-//     console.log('error', error);      //eslint-disable-line no-console
-//     res.sendStatus(500);
-//   }
-// }
+async function rechazarProspecto (req, res) {
+  try {
+    const obs = req.params.observaciones;
+    const prospecto = await Prospecto.findByIdAndUpdate(
+      { _id: req.params.id },
+      { observaciones: obs, estatus: 'Rechazado' },
+      { new: true }
+    );
+    res.status(200);
+    res.json(prospecto);
+  } catch (error) {
+    console.log('error', error);      //eslint-disable-line no-console
+    res.sendStatus(500);
+  }
+}
+
+
+async function autorizarProspecto (req, res) {
+  try {
+    // const obs = req.params.observaciones;
+    const prospecto = await Prospecto.findByIdAndUpdate(
+      { _id: req.params.id },
+      { estatus: 'Autorizado' },
+      { new: true }
+    );
+    res.status(200);
+    res.json(prospecto);
+  } catch (error) {
+    console.log('error', error);      //eslint-disable-line no-console
+    res.sendStatus(500);
+  }
+}
 
 
 
@@ -59,5 +76,6 @@ module.exports = {
   getProspectos,
   postProspecto,
   deleteProspecto,
-  // changeProspectoStatus
+  rechazarProspecto,
+  autorizarProspecto
 };

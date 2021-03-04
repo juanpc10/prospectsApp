@@ -1,0 +1,32 @@
+
+
+
+.header1 {
+  display: flex;
+  margin-bottom: 10vh;
+}
+
+
+.header1 img {
+  margin-left: 50px;
+}
+
+
+.header-title { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.header-title a { 
+  color: green;
+  text-decoration-line : none;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50vh;
+}
