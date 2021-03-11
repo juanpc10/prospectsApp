@@ -1,6 +1,7 @@
 
 
 
+
 import React, { useState, useEffect, useContext, } from "react";
 
 import Header from './Header';
@@ -8,18 +9,23 @@ import "./evaluarProspectos.css";
 
 
 import 'antd/dist/antd.css';
-import { Table } from 'antd';
+import { Table, Input, InputNumber, Form, } from 'antd';
 
 import ApiClient from "../context/ApiClient";
 
 import { GlobalContext } from '../context/globalState';
 
 
+
+
 function EvaluarProspectos() {
 
   const { prospectos, addProspecto, deleteProspecto, evaluandoProspectos, addEvaluandoProspecto, deleteEvaluandoProspecto } = useContext(GlobalContext);
-  const [observaciones, handleChangeObservaciones] = useState('');
-  const [isEditable, setEdit] = useState();
+  // let observaciones;
+  // evaluandoProspectos.map(prospecto => {
+
+    const [observaciones, handleObservaciones] = useState('');
+  // })
 
   useEffect(() => {
     if (evaluandoProspectos.length == 0) {
@@ -37,8 +43,11 @@ function EvaluarProspectos() {
       })
     }   // eslint-disable-next-line
   }, []);
+  // console.log(evaluandoProspectos);
   
   const autorizar = (id, i, prospecto) => {
+    // console.log(i);
+    // console.log(prospecto);
     const URL = "http://localhost:3201/prospecto/autorizar/";
     fetch(URL + id, { method: 'put' })
       .then(res => res.text())
@@ -54,39 +63,13 @@ function EvaluarProspectos() {
     deleteEvaluandoProspecto(i);
   }
 
-  const rechazar = (id, i, prospecto) => {
-    console.log(id);
-    console.log(i)
-    console.log(prospecto);
-
-    const URL = "http://localhost:3201/prospecto/rechazar/";
-    fetch(URL + id + "/" + observaciones, { method: 'put' })
-      .then(res => res.text())
-      .then(res => console.log(res))
-
-    for(let j = 0; j <prospectos.length; j++) {
-      if (prospectos[j]._id == id) {
-        deleteProspecto(j);
-        prospecto.estatus = "Rechazado"
-        prospecto.observaciones = observaciones;
-        addProspecto(prospecto);
-      }
-    }
-    deleteEvaluandoProspecto(i);
-    setEdit();
-  }
-
-  const editHandler = e => {
-    console.log(e);
-    if(e !== isEditable) {
-      setEdit(e);
-    } else if (e === isEditable) {
-      setEdit();
-    }
-  }
-  const submitHandler = (e) => {
+  const onSubmit = (e, i, prospecto) => {
     e.preventDefault();
-    handleChangeObservaciones('');
+    // const URL = "http://localhost:3201/prospecto/rechazar/";
+    // fetch(URL + id + "/" + e, { method: 'put' })
+    //   .then(res => res.text())
+    //   .then(res => console.log(res))
+    // console.log(observaciones);
   }
   
   
@@ -95,18 +78,12 @@ function EvaluarProspectos() {
     prospecto.accion = 
     <>
       <button value={prospecto._id} onClick={(a) => autorizar(a.target.value, i, prospecto)}>Autorizar</button>
-      {isEditable === i ? (
-        <>
-          <button onClick={() => editHandler(true)}>Cancelar</button>
-          <form onSubmit={submitHandler}  >
-            <input id='inputfield' type="text" name="inputfield" value={observaciones} onChange={(a) => handleChangeObservaciones(a.target.value)} placeholder="Observaciones..." />
-            <button type="submit" value={prospecto._id} onClick={(a) => rechazar(a.target.value, i, prospecto)} >Reject</button> 
-          </form>
-        </>
-        ) : ( 
-        <button onClick={() => editHandler(i)}>Rechazar</button>
-        )
-      }
+      {/* <form onSubmit={onSubmit}>
+        <button type="submit" value="Submit" >Rechazar</button>
+        <input type="text" name="observaciones" value={observaciones} onChange={(e) => handleObservaciones(e.target.value)} placeholder="Observaciones..." ></input>
+      </form> */}
+      <EditableCell />
+
     </>
   })
 

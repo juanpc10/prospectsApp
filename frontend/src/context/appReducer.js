@@ -1,34 +1,31 @@
 export default (state, action) => {
-  console.log(state);
-  console.log(action);
+  // console.log(state);
+  // console.log(action);
   switch(action.type) {
 
-    // case 'add_singleEvent':
-    //   return {
-    //     ...state,
-    //     items: [action.payload, ...state.items] 
-    //   }
-    case 'ADD_TOTODOSPROSPECTOS':
+    case 'add_prospecto':
       return {
         ...state,
-        todosProspectos: [action.payload, ...state.todosProspectos] 
+        prospectos: [action.payload, ...state.prospectos] 
       }
-    case 'DELETE_FROMTODOSPROSPECTOS':
+    case 'delete_prospecto':
       return {
         ...state,
-        todosProspectos: [...state.todosProspectos.slice(0, action.payload), ...state.todosProspectos.slice(action.payload + 1, state.length)]
+        prospectos: [...state.prospectos.slice(0, action.payload), ...state.prospectos.slice(action.payload + 1, state.length)]
       }
-    case 'ADD_TOENVIADOSPROSPECTOS':
+
+      case 'add_evaluandoProspecto':
       return {
         ...state,
-        enviadosProspectos: [action.payload, ...state.enviadosProspectos] 
+        evaluandoProspectos: [action.payload, ...state.evaluandoProspectos] 
       }
-    case 'DELETE_FROMENVIADOSPROSPECTOS':
+    case 'delete_evaluandoProspecto':
       return {
         ...state,
-        enviadosProspectos: [...state.enviadosProspectos.slice(0, action.payload), ...state.enviadosProspectos.slice(action.payload + 1, state.length)]
+        evaluandoProspectos: [...state.evaluandoProspectos.slice(0, action.payload), ...state.evaluandoProspectos.slice(action.payload + 1, state.length)]
       }
-    default:
-      return state;
+
+  default:
+    return state;
   }
 }

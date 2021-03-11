@@ -4,8 +4,8 @@ import AppReducer from './appReducer';
 
 // Initial state
 const initialState = {
-  todosProspectos: [],
-  enviadosProspectos: []
+  prospectos: [],
+  evaluandoProspectos: []
 }
 
 // context
@@ -15,40 +15,36 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch ] = useReducer(AppReducer, initialState );
 
-  //actions
-  // function addSingleEvent (singleEvent) {
-  //   dispatch({
-  //     type: 'add_singleEvent',
-  //     payload: singleEvent
-  //   });
-  // }
-  function addToTodosProspectos (todosProspectos) {
+  // actions
+  function addProspecto (prospecto) {
     dispatch({
-      type: 'ADD_TOTODOSPROSPECTOS',
-      payload: todosProspectos
+      type: 'add_prospecto',
+      payload: prospecto
     });
   }
-  function deleteFromTodosProspectos (i) {
+  function deleteProspecto (prospecto) {
     dispatch({
-      type: 'DELETE_FROMTODOSPROSPECTOS',
-      payload: i
+      type: 'delete_prospecto',
+      payload: prospecto
     });
   }
-  function addToEnviadosProspectos (enviadosProspectos) {
+
+  function addEvaluandoProspecto (evaluandoProspecto) {
     dispatch({
-      type: 'ADD_TOENVIADOSPROSPECTOS',
-      payload: enviadosProspectos
+      type: 'add_evaluandoProspecto',
+      payload: evaluandoProspecto
     });
   }
-  function deleteFromEnviadosProspectos (i) {
+  function deleteEvaluandoProspecto (evaluandoProspecto) {
     dispatch({
-      type: 'DELETE_FROMENVIADOSPROSPECTOS',
-      payload: i
+      type: 'delete_evaluandoProspecto',
+      payload: evaluandoProspecto
     });
   }
   
+  
   return  (
-    <GlobalContext.Provider value={{ todosProspectos: state.todosProspectos, enviadosProspectos: state.enviadosProspectos, addToTodosProspectos, deleteFromTodosProspectos, addToEnviadosProspectos, deleteFromEnviadosProspectos}}>
+    <GlobalContext.Provider value={{ prospectos: state.prospectos, evaluandoProspectos: state.evaluandoProspectos, addProspecto, deleteProspecto, addEvaluandoProspecto, deleteEvaluandoProspecto}}>
       {children}
     </GlobalContext.Provider>
   )

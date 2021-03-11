@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, } from "react";
 
 import './main.css';
 import Header from './Header';
@@ -8,8 +8,39 @@ import { Popconfirm, Modal, Button } from 'antd';
 
 import ApiClient from "../context/ApiClient";
 
+import { GlobalContext } from '../context/globalState';
 
-function Main() {
+
+import { Upload, message} from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+
+
+
+
+const props = {
+  name: 'file',
+  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  headers: {
+    authorization: 'authorization-text',
+  },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } 
+    // else if (info.file.status === 'error') {
+    //   message.error(`${info.file.name} file upload failed.`);
+    // }
+  },
+};
+
+
+function Home() {
+  const { addProspecto} = useContext(GlobalContext);
+  const { prospectos } = useContext(GlobalContext);
+
   const [prospectData, setData] = useState([]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -23,10 +54,16 @@ function Main() {
   const [codigoPostal, handleChangeCodigoPostal] = useState('');
   const [telefono, handleChangeTelefono] = useState('');
   const [rfc, handleChangeRFC] = useState('');
+  const [files, handleChangeFiles] = useState('');
+
 
   useEffect(() => {
-    ApiClient.getProspects()
-      .then((data) => setData(data))
+    if (prospectos.length == 0) {
+      ApiClient.getProspects()
+      .then(data => data.map(item => { 
+          addProspecto(item);
+        } )); // eslint-disable-next-line
+    }
   }, []);
 
   const showModal = () => {
@@ -35,13 +72,14 @@ function Main() {
   const text = 'Ningún dato será guardado, ¿Desea continuar?';
   function confirm() {
     setIsModalVisible(false);
+    handleChangeFiles('');
   }
 
   const onSubmit = e => {
     e.preventDefault();
     const newItem = {}
-    console.log(prospectData);
-    console.log(prospectData.length);
+    // console.log(prospectData);
+    // console.log(prospectData.length);
     newItem.key = prospectData.length + 1;
     newItem.nombre = nombre;
     newItem.apellido = apellido;
@@ -54,17 +92,25 @@ function Main() {
     newItem.rfc = rfc;
     newItem.estatus = 'Enviado';
     newItem.observaciones = "";
+    let filePath = files;
+    let splFileName = filePath.split("\\")
+    let fileName = splFileName[2];
+    console.log(fileName);
+    newItem.documentos = fileName;
+    // console.log(files);
 
-    console.log(newItem);
+    // console.log(newItem);
 
+    // const URL = "http://localhost:3201/prospecto/";
+    // fetch(URL,
+    //   { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    //     method: "post", body: JSON.stringify(newItem)
+    //   })
+    //     .then(res => res.text())
+    //     .then(res => console.log(res))
 
-    const URL = "http://localhost:3201/prospecto/";
-    fetch(URL,
-      { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        method: "post", body: JSON.stringify(newItem)
-      })
-        .then(res => res.text())
-        .then(res => console.log(res))
+    handleChangeFiles('');
+    addProspecto(newItem);  
     setIsModalVisible(false);
   }
 
@@ -84,7 +130,7 @@ function Main() {
           </Popconfirm>
         ]}
         >
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} encType="multipart/form/data">
             <div className="agregar-input">
               <p>Nombre</p><input type="text" name="nombre" value={nombre} onChange={(e) => handleChangeNombre(e.target.value)} placeholder="Nombre..." ></input>
             </div>
@@ -112,6 +158,13 @@ function Main() {
             <div className="agregar-input">
               <p>RFC</p><input type="text" name="rfc" value={rfc} onChange={(e) => handleChangeRFC(e.target.value)} placeholder="RFC..." ></input>
             </div>
+            <div className="form-group">
+              <label for="file">+ Subir Documento</label>
+              <input type="file" name="file" value={files} onChange={(e) => handleChangeFiles(e.target.value)} id="file" className="form-control-file" multiple></input>
+            </div>
+            {/* <Upload {...props}>
+              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            </Upload> */}
             <div className='form-button-container'>
               <button type="submit" value="Submit" className='boton-registrar'>Registrar</button>
             </div>
@@ -124,5 +177,11 @@ function Main() {
   );
 }
 
-export default Main;
+export default Home;
+
+
+
+
+
+
 

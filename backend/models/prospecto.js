@@ -14,6 +14,7 @@ const ProspectoSchema = new Schema ({
   telefono: {type: String, required: true},
   rfc: {type: String, required: true},
   estatus: {type: String, required: true},
+  documentos: {type: String, required: false},
   observaciones: {type: String, required: false},
 });
 

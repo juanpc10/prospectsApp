@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import 'antd/dist/antd.css';
 import "./verProspectos.css";
 
@@ -9,7 +9,7 @@ import { Table } from 'antd';
 
 import Header from './Header';
 
-
+import { GlobalContext } from '../context/globalState';
 
 
 
@@ -22,12 +22,17 @@ const columns = [
 
 
 function VerProspectos() {
-  const [prospectData, setData] = useState([]);
+  const { prospectos, addProspecto } = useContext(GlobalContext);
 
   useEffect(() => {
-    ApiClient.getProspects()
-      .then((data) => setData(data))
+    if (prospectos.length == 0) {
+      ApiClient.getProspects()
+      .then(data => data.map(item => { 
+          addProspecto(item);
+        } )); // eslint-disable-next-line
+    }
   }, []);
+
 
   return (
     <>
@@ -48,12 +53,15 @@ function VerProspectos() {
                   <p>RFC: {record.rfc}</p>
                 </div>
                 <div>
+                  <p>Documentos: {record.documentos}</p>
+                </div>
+                <div>
                   <p>Observaciones: {record.observaciones}</p>
                 </div>
               </>
             ),
           }}
-          dataSource={prospectData}
+          dataSource={prospectos}
         />
       </div>
     </>
