@@ -30,12 +30,12 @@ function Home() {
 
 
   useEffect(() => {
-    if (prospectos.length == 0) {
-      ApiClient.getProspects()
+    if (prospectos.length === 0) {
+      ApiClient.getProspects()                   // eslint-disable-next-line
       .then(data => data.map(item => { 
           addProspecto(item);
-        } )); // eslint-disable-next-line
-    }
+        } ));
+    }                                            // eslint-disable-next-line
   }, []);
 
   const showModal = () => {

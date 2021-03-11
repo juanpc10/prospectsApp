@@ -2,6 +2,8 @@
 
 const BASE_URL = "http://localhost:3201/prospectos";
 
+
+// eslint-disable-next-line
 export default {
   getProspects: () => {
     return fetchRequest();
@@ -18,3 +20,4 @@ async function fetchRequest() {
     console.log(err);
   }
 };
+

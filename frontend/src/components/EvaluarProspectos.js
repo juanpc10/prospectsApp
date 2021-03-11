@@ -17,15 +17,15 @@ function EvaluarProspectos() {
   const [isEditable, setEdit] = useState();
 
   useEffect(() => {
-    if (evaluandoProspectos.length == 0) {
+    if (evaluandoProspectos.length === 0) {
       ApiClient.getProspects()
       .then(data => {
-        if(prospectos.length == 0) {
-          data.map(item => { 
+        if(prospectos.length === 0) {  // eslint-disable-next-line
+          data.map(item => {  
             addProspecto(item);
           })
         }
-        let prospectosSinCalificar = data.filter((item) => item.estatus.includes("Enviado"));
+        let prospectosSinCalificar = data.filter((item) => item.estatus.includes("Enviado"));  // eslint-disable-next-line
         prospectosSinCalificar.map(item => { 
           addEvaluandoProspecto(item);
         })
@@ -40,7 +40,7 @@ function EvaluarProspectos() {
       .then(res => console.log(res))
 
     for(let j = 0; j <prospectos.length; j++) {
-      if (prospectos[j]._id == id) {
+      if (prospectos[j]._id === id) {
         deleteProspecto(j);
         prospecto.estatus = "Autorizado"
         addProspecto(prospecto);
@@ -60,7 +60,7 @@ function EvaluarProspectos() {
       .then(res => console.log(res))
 
     for(let j = 0; j <prospectos.length; j++) {
-      if (prospectos[j]._id == id) {
+      if (prospectos[j]._id === id) {
         deleteProspecto(j);
         prospecto.estatus = "Rechazado"
         prospecto.observaciones = observaciones;
@@ -84,7 +84,7 @@ function EvaluarProspectos() {
     handleChangeObservaciones('');
   }
   
-  let prospectosSinCalificar = evaluandoProspectos.filter((item) => item.estatus.includes("Enviado"));
+  let prospectosSinCalificar = evaluandoProspectos.filter((item) => item.estatus.includes("Enviado")); // eslint-disable-next-line
   prospectosSinCalificar.map((prospecto, i) => {
     prospecto.accion = 
     <>
