@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import "./verProspectos.css";
+import "./verProspectos.scss";
 
 import Header from './Header';
 

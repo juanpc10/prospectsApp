@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, } from "react";
-import "./evaluarProspectos.css";
+import "./evaluarProspectos.scss";
 
 import Header from './Header';
 

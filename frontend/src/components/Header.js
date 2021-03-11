@@ -1,4 +1,4 @@
-import './header.css';
+import './header.scss';
 import { Link } from "@reach/router";
 
 
