@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import 'antd/dist/antd.css';
+import React, { useEffect, useContext } from "react";
 import "./verProspectos.css";
-
-import ApiClient from "../context/ApiClient";
-
-import { Table } from 'antd';
-// import { Badge } from 'antd';
 
 import Header from './Header';
 
-import { GlobalContext } from '../context/globalState';
+import 'antd/dist/antd.css';
+import { Table } from 'antd';
 
+import ApiClient from "../context/ApiClient";
+import { GlobalContext } from '../context/globalState';
 
 
 const columns = [

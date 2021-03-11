@@ -1,18 +1,13 @@
 import React, { useState, useEffect, useContext, } from "react";
+import './home.css';
 
-import './main.css';
 import Header from './Header';
-import { Link } from "@reach/router";
 
+import { Link } from "@reach/router";
 import { Popconfirm, Modal, Button } from 'antd';
 
 import ApiClient from "../context/ApiClient";
-
 import { GlobalContext } from '../context/globalState';
-
-
-
-
 
 
 

@@ -1,17 +1,12 @@
-
-
-
 import React, { useState, useEffect, useContext, } from "react";
-
-import Header from './Header';
 import "./evaluarProspectos.css";
 
+import Header from './Header';
 
 import 'antd/dist/antd.css';
 import { Table } from 'antd';
 
 import ApiClient from "../context/ApiClient";
-
 import { GlobalContext } from '../context/globalState';
 
 
@@ -89,7 +84,6 @@ function EvaluarProspectos() {
     handleChangeObservaciones('');
   }
   
-  
   let prospectosSinCalificar = evaluandoProspectos.filter((item) => item.estatus.includes("Enviado"));
   prospectosSinCalificar.map((prospecto, i) => {
     prospecto.accion = 
@@ -109,8 +103,6 @@ function EvaluarProspectos() {
       }
     </>
   })
-
-
   const columns = [
     { title: 'Nombre', dataIndex: 'nombre', key: 'nombre' },
     { title: 'Apellido', dataIndex: 'apellido', key: 'apellido' },
