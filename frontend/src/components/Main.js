@@ -11,37 +11,14 @@ import ApiClient from "../context/ApiClient";
 import { GlobalContext } from '../context/globalState';
 
 
-import { Upload, message} from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
 
 
 
-
-const props = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } 
-    // else if (info.file.status === 'error') {
-    //   message.error(`${info.file.name} file upload failed.`);
-    // }
-  },
-};
 
 
 function Home() {
   const { addProspecto} = useContext(GlobalContext);
   const { prospectos } = useContext(GlobalContext);
-
-  const [prospectData, setData] = useState([]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -78,9 +55,7 @@ function Home() {
   const onSubmit = e => {
     e.preventDefault();
     const newItem = {}
-    // console.log(prospectData);
-    // console.log(prospectData.length);
-    newItem.key = prospectData.length + 1;
+    newItem.key = prospectos.length + 1;
     newItem.nombre = nombre;
     newItem.apellido = apellido;
     newItem.segundoApellido = segundoApellido;
@@ -94,20 +69,16 @@ function Home() {
     newItem.observaciones = "";
     let filePath = files;
     let splFileName = filePath.split("\\")
-    let fileName = splFileName[2];
-    console.log(fileName);
+    let fileName = splFileName[2];;
     newItem.documentos = fileName;
-    // console.log(files);
 
-    // console.log(newItem);
-
-    // const URL = "http://localhost:3201/prospecto/";
-    // fetch(URL,
-    //   { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-    //     method: "post", body: JSON.stringify(newItem)
-    //   })
-    //     .then(res => res.text())
-    //     .then(res => console.log(res))
+    const URL = "http://localhost:3201/prospecto/";
+    fetch(URL,
+      { headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        method: "post", body: JSON.stringify(newItem)
+      })
+        .then(res => res.text())
+        .then(res => console.log(res))
 
     handleChangeFiles('');
     addProspecto(newItem);  
@@ -162,9 +133,6 @@ function Home() {
               <label for="file">+ Subir Documento</label>
               <input type="file" name="file" value={files} onChange={(e) => handleChangeFiles(e.target.value)} id="file" className="form-control-file" multiple></input>
             </div>
-            {/* <Upload {...props}>
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
-            </Upload> */}
             <div className='form-button-container'>
               <button type="submit" value="Submit" className='boton-registrar'>Registrar</button>
             </div>
