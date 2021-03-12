@@ -124,7 +124,7 @@ function Home() {
             <div className="agregar-input">
               <p>RFC</p><input type="text" name="rfc" value={rfc} onChange={(e) => handleChangeRFC(e.target.value)} placeholder="RFC..." ></input>
             </div>
-            <div className="form-group">
+            <div className="documentos">
               <label for="file">+ Subir Documento</label>
               <input type="file" name="file" value={files} onChange={(e) => handleChangeFiles(e.target.value)} id="file" className="form-control-file" multiple></input>
             </div>

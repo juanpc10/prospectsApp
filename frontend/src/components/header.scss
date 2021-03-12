@@ -1,29 +1,25 @@
 
 .header1 {
   display: flex;
+  justify-content: space-around;
   margin-bottom: 10vh;
+  @media (max-width: 768px) and (min-width: 480px) {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  @media (max-width: 480px) {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 
-.header1 img {
-  margin-left: 50px;
-}
 
 .header-title { 
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
-.header-title a { 
-  color: green;
-  text-decoration-line : none;
-}
-
-.container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 50vh;
-}
 

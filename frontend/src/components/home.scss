@@ -17,3 +17,44 @@
   width: 70%;
   margin: 10px;
 }
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50vh;
+  @media (max-width: 768px) and (min-width: 480px) {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  @media (max-width: 480px) {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+
+.documentos {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-content svg {
+  display: none;
+}
+
+.ant-modal-root .ant-modal-wrap .ant-modal .ant-modal-content .ant-modal-body {
+  @media (max-width: 768px) and (min-width: 480px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 480px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
